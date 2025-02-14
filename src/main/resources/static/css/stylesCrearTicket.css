@@ -1,0 +1,164 @@
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-image: url('/static/imagenes/Fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  min-height: 100vh;
+}
+.container {
+  max-width: 100px;
+  width: 100%;
+  margin: 50px auto;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  color: rgba(243, 244, 246, 1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #0cc0df;
+  border-bottom: 2px solid #0cc0df;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.logo h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #0cc0df;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav a {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #0cc0df;
+}
+
+.bi-person-circle {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.bi-person-circle:hover {
+  color: #0cc0df;
+}
+
+/* Menú hamburguesa responsivo */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+}
+.container h1 {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  color: #0cc0df;
+}
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  color:white;
+}
+select, input[type="text"], textarea, input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid white;
+  background-color: #2A2A2A;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: white;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0cc0df;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #089ab5;
+}
+
+input::placeholder {
+  color: white;
+}
+
+textarea::placeholder {
+  color: white;
+}

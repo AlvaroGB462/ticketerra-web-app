@@ -1,0 +1,287 @@
+@charset "UTF-8";
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-image: url('/static/imagenes/Fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #0cc0df;
+  border-bottom: 2px solid #0cc0df;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.logo h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #0cc0df;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav a {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #0cc0df;
+}
+
+.bi-person-circle {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.bi-person-circle:hover {
+  color: #0cc0df;
+}
+
+/* Menú hamburguesa responsivo */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+}
+
+/* Estilos para la corona en el menú */
+.bi-crown {
+  color: gold;
+  font-size: 1.5rem;
+}
+
+/* Resaltar la corona cuando el usuario es premium */
+.bi-crown.premium {
+  color: #ffd700; /* Dorado */
+  cursor: default;
+  pointer-events: none; /* Evitar que se pueda hacer clic */
+}
+
+/* Ocultar el botón de registro cuando el usuario está logueado */
+.hidden {
+  display: none;
+}
+
+main {
+  display: flex;
+  padding-top: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  width: 400px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  color: rgba(243, 244, 246, 1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  font-weight: 700;
+  color: #0CC0DF;
+}
+
+.form {
+  margin-top: 1.5rem;
+}
+
+.input-group {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+}
+
+.input-group label {
+  display: block;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(55, 65, 81, 1);
+  outline: none;
+  background-color: rgba(30, 30, 30, 1);
+  padding: 0.8rem;
+  color: rgba(243, 244, 246, 1);
+  font-size: 0.95rem;
+}
+
+.input-group input:focus {
+  border-color: #0CC0DF;
+}
+
+.forgot {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.85rem;
+  line-height: 1rem;
+  color: rgba(156, 163, 175, 1);
+  margin: 10px 0;
+}
+
+.forgot a {
+  color: #0CC0DF;
+  text-decoration: none;
+}
+
+.forgot a:hover {
+  text-decoration: underline;
+}
+
+.sign {
+  display: block;
+  width: 100%;
+  background-color: #0CC0DF;
+  padding: 0.85rem;
+  text-align: center;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.sign:hover {
+  background-color: #0098D4;
+}
+
+.social-message {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.line {
+  height: 1px;
+  flex: 1;
+  background-color: rgba(55, 65, 81, 1);
+}
+
+.social-message .message {
+  padding: 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  color: rgba(156, 163, 175, 1);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.social-icons .icon {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(30, 30, 30, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.social-icons .icon:hover {
+  background-color: #0CC0DF;
+}
+
+.signup {
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1rem;
+  color: rgba(156, 163, 175, 1);
+  margin-top: 20px;
+}
+
+.signup a {
+  color: #0CC0DF;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}

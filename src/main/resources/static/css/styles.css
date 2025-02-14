@@ -1,0 +1,230 @@
+@charset "UTF-8";
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-image: url('/static/imagenes/Fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #0cc0df;
+  border-bottom: 2px solid #0cc0df;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.logo h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #0cc0df;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav a {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #0cc0df;
+}
+
+.bi-person-circle {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.bi-person-circle:hover {
+  color: #0cc0df;
+}
+
+/* Menú hamburguesa responsivo */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+}
+
+
+main {
+  text-align: left;
+  margin-top: 130px;
+  padding: 0 20px;
+  margin-left: 60px;
+}
+
+main h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #0cc0df;
+  margin-bottom: 20px;
+}
+
+main h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+main p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 50px;
+}
+
+.button {
+  padding: 12px 50px;
+  font-size: 18px;
+  color: black;
+  background-color: #0cc0df;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #089ab5;
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 0px 0;
+  margin-top: 150px;
+}
+
+.footer p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Estilos para el carrusel de valoraciones */
+#valoracionesCarrusel {
+  margin-top: 30px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.usuario {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.estrellas {
+  color: #FFD700;
+  font-size: 20px;
+}
+
+.comentario {
+  font-size: 16px;
+  color: #DCDCDC;
+  margin-top: 5px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #0cc0df;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-size: 50%;
+}
+
+/* Estilos para la corona en el menú */
+.bi-crown {
+    color: gold;
+    font-size: 1.5rem;
+}
+
+/* Resaltar la corona cuando el usuario es premium */
+.bi-crown.premium {
+    color: #ffd700; /* Dorado */
+    cursor: default;
+    pointer-events: none; /* Evitar que se pueda hacer clic */
+}
+
+/* Ocultar el botón de registro cuando el usuario está logueado */
+.hidden {
+    display: none;
+}
