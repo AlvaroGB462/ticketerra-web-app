@@ -11,10 +11,10 @@ public class InicioControlador {
 
     @GetMapping("/")
     public String redirectToIndex() {
-        return "redirect:/usuarios/index";
+        return "index";
     }
 
-    @GetMapping("/index")
+    @GetMapping("usuarios/index")
     public ModelAndView loginForm() {
         return new ModelAndView("index");
     }
