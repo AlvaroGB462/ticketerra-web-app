@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Tickets - Ticketerra</title>
-    <link rel="icon" href="imagenes/LogoFavicon.jpg" />
-    <link rel="stylesheet" href="styleAdminSupremo.css">
+    <link rel="icon" href="/static/imagenes/LogoFavicon.jpg" />
+    <link rel="stylesheet" href="/static/css/styleAdminSupremo.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"

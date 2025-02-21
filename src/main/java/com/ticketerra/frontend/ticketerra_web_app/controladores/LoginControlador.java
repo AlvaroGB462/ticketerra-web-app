@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ticketerra.frontend.ticketerra_web_app.servicios.LoginServicio;
 
@@ -21,60 +20,82 @@ public class LoginControlador {
 	@Autowired
 	private LoginServicio loginServicio;
 
+	// Página de login
 	@GetMapping("/login")
-	public ModelAndView loginForm() {
-		ModelAndView mav = new ModelAndView("login");
-		return mav;
+	public String loginForm() {
+		return "login"; // Vista del formulario de login
 	}
 
-	@PostMapping("/login")
-	public ModelAndView autenticarUsuario(@RequestParam String correo, @RequestParam String contrasena,
-			HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+	 // Manejo de autenticación
+    @PostMapping("/login")
+    public String autenticarUsuario(@RequestParam String correo, @RequestParam String contrasena, HttpSession session, Model model) {
+        String rolUsuario = loginServicio.obtenerRolUsuario(correo, contrasena);
 
-		if (loginServicio.autenticarUsuario(correo, contrasena)) {
-			session.setAttribute("usuario", correo);
-			mav.setViewName("redirect:/usuarios/index");
-		} else {
-			mav.setViewName("login");
-			mav.addObject("mensaje", "Correo o contraseña incorrectos.");
-		}
-		return mav;
+        if (rolUsuario != null) {
+            session.setAttribute("usuario", correo);
+            session.setAttribute("rol", rolUsuario);
+
+            // Actualizar estado activo a true cuando inicia sesión
+            loginServicio.actualizarEstadoActivo(correo, true);
+
+            // Redirigir según el rol
+            if ("adminSupremo".equals(rolUsuario)) {
+                return "redirect:/usuarios/adminSupremo";
+            } else {
+                return "redirect:/usuarios/index";
+            }
+        } else {
+            model.addAttribute("mensaje", "Correo o contraseña incorrectos.");
+            return "login";
+        }
+    }
+
+	// Página para adminSupremo
+	@GetMapping("/adminSupremo")
+	public String adminSupremoDashboard() {
+		return "adminSupremo"; // Vista de adminSupremo.jsp
 	}
 
-	@GetMapping("/logout")
-	public String cerrarSesion(HttpSession session) {
-		session.invalidate();
-		return "redirect:/usuarios/login";
-	}
+	// Cerrar sesión
+    @GetMapping("/logout")
+    public String cerrarSesion(HttpSession session) {
+        String correo = (String) session.getAttribute("usuario");
 
-	// Página de recuperar contraseña
+        if (correo != null) {
+            // Cambiar estado activo a false cuando el usuario cierra sesión
+            loginServicio.actualizarEstadoActivo(correo, false);
+        }
+
+        session.invalidate();
+        return "redirect:/usuarios/login";
+    }
+
+	// Página de recuperación de contraseña
 	@GetMapping("/recuperar")
 	public String mostrarFormularioRecuperar() {
-		return "recuperar"; // Vista JSP de recuperación
+		return "recuperar"; // Vista para el formulario de recuperación de contraseña
 	}
 
-	// Recuperar la contraseña
+	// Acción de recuperar contraseña (envía el correo con el token)
 	@PostMapping("/recuperar")
 	public String recuperarContrasena(@RequestParam String correo, Model model) {
-		String mensaje = loginServicio.recuperarContrasena(correo);
-		model.addAttribute("mensaje", mensaje);
-		return "recuperar"; // Volver a mostrar la vista con el mensaje
+		String mensaje = loginServicio.recuperarContrasena(correo); // Recuperamos el token
+		model.addAttribute("mensaje", mensaje); // Se muestra un mensaje sobre el éxito o error
+		return "recuperar"; // Vista de recuperación, muestra el mensaje
 	}
 
-	// Página de restablecer contraseña (cuando se hace clic en el enlace del
-	// correo)
+	// Página para restablecer la contraseña
 	@GetMapping("/restablecer/{token}")
 	public String mostrarFormularioRestablecer(@PathVariable String token, Model model) {
 		model.addAttribute("token", token);
-		return "restablecer"; // Vista JSP de restablecimiento
+		return "restablecer"; // Vista para restablecer la contraseña
 	}
 
-	// Restablecer la contraseña
+	// Acción para restablecer la contraseña
 	@PostMapping("/restablecer")
 	public String restablecerContrasena(@RequestParam String token, @RequestParam String nuevaContrasena, Model model) {
 		String mensaje = loginServicio.restablecerContrasena(token, nuevaContrasena);
 		model.addAttribute("mensaje", mensaje);
-		return "restablecer"; // Volver a mostrar la vista con el mensaje
+		return "index"; // Redirige a la página principal después de restablecer
 	}
 }

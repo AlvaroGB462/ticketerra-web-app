@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  background-image: url('imagenes/Fondo.jpg');
+  background-image: url('/static/imagenes/Fondo.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
