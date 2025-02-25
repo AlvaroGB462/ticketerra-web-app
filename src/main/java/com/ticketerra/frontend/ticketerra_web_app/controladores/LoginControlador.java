@@ -17,16 +17,16 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/usuarios")
 public class LoginControlador {
 
-	@Autowired
-	private LoginServicio loginServicio;
+    @Autowired
+    private LoginServicio loginServicio;
 
-	// Página de login
-	@GetMapping("/login")
-	public String loginForm() {
-		return "login"; // Vista del formulario de login
-	}
+    // Página de login
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login"; // Vista del formulario de login
+    }
 
-	 // Manejo de autenticación
+    // Manejo de autenticación
     @PostMapping("/login")
     public String autenticarUsuario(@RequestParam String correo, @RequestParam String contrasena, HttpSession session, Model model) {
         String rolUsuario = loginServicio.obtenerRolUsuario(correo, contrasena);
@@ -40,7 +40,7 @@ public class LoginControlador {
 
             // Redirigir según el rol
             if ("adminSupremo".equals(rolUsuario)) {
-                return "redirect:/usuarios/adminSupremo";
+                return "redirect:/usuarios/adminSupremoUsuarios";
             } else {
                 return "redirect:/usuarios/index";
             }
@@ -50,52 +50,52 @@ public class LoginControlador {
         }
     }
 
-	// Página para adminSupremo
-	@GetMapping("/adminSupremo")
-	public String adminSupremoDashboard() {
-		return "adminSupremo"; // Vista de adminSupremo.jsp
-	}
+    // Página para adminSupremo
+    @GetMapping("/adminSupremoUsuarios")
+    public String adminSupremoDashboard() {
+        return "adminSupremoUsuarios";
+    }
 
-	// Cerrar sesión
+    // Cerrar sesión
     @GetMapping("/logout")
     public String cerrarSesion(HttpSession session) {
         String correo = (String) session.getAttribute("usuario");
 
         if (correo != null) {
             // Cambiar estado activo a false cuando el usuario cierra sesión
-            loginServicio.actualizarEstadoActivo(correo, false);
+            loginServicio.actualizarEstadoAinactivo(correo, false);
         }
 
         session.invalidate();
-        return "redirect:/usuarios/login";
+        return "redirect:/usuarios/index";
     }
 
-	// Página de recuperación de contraseña
-	@GetMapping("/recuperar")
-	public String mostrarFormularioRecuperar() {
-		return "recuperar"; // Vista para el formulario de recuperación de contraseña
-	}
+    // Página de recuperación de contraseña
+    @GetMapping("/recuperar")
+    public String mostrarFormularioRecuperar() {
+        return "recuperar"; // Vista para el formulario de recuperación de contraseña
+    }
 
-	// Acción de recuperar contraseña (envía el correo con el token)
-	@PostMapping("/recuperar")
-	public String recuperarContrasena(@RequestParam String correo, Model model) {
-		String mensaje = loginServicio.recuperarContrasena(correo); // Recuperamos el token
-		model.addAttribute("mensaje", mensaje); // Se muestra un mensaje sobre el éxito o error
-		return "recuperar"; // Vista de recuperación, muestra el mensaje
-	}
+    // Acción de recuperar contraseña (envía el correo con el token)
+    @PostMapping("/recuperar")
+    public String recuperarContrasena(@RequestParam String correo, Model model) {
+        String mensaje = loginServicio.recuperarContrasena(correo); // Recuperamos el token
+        model.addAttribute("mensaje", mensaje); // Se muestra un mensaje sobre el éxito o error
+        return "recuperar"; // Vista de recuperación, muestra el mensaje
+    }
 
-	// Página para restablecer la contraseña
-	@GetMapping("/restablecer/{token}")
-	public String mostrarFormularioRestablecer(@PathVariable String token, Model model) {
-		model.addAttribute("token", token);
-		return "restablecer"; // Vista para restablecer la contraseña
-	}
+    // Página para restablecer la contraseña
+    @GetMapping("/restablecer/{token}")
+    public String mostrarFormularioRestablecer(@PathVariable String token, Model model) {
+        model.addAttribute("token", token);
+        return "restablecer"; // Vista para restablecer la contraseña
+    }
 
-	// Acción para restablecer la contraseña
-	@PostMapping("/restablecer")
-	public String restablecerContrasena(@RequestParam String token, @RequestParam String nuevaContrasena, Model model) {
-		String mensaje = loginServicio.restablecerContrasena(token, nuevaContrasena);
-		model.addAttribute("mensaje", mensaje);
-		return "index"; // Redirige a la página principal después de restablecer
-	}
+    // Acción para restablecer la contraseña
+    @PostMapping("/restablecer")
+    public String restablecerContrasena(@RequestParam String token, @RequestParam String nuevaContrasena, Model model) {
+        String mensaje = loginServicio.restablecerContrasena(token, nuevaContrasena);
+        model.addAttribute("mensaje", mensaje);
+        return "index"; // Redirige a la página principal después de restablecer
+    }
 }

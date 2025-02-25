@@ -2,25 +2,27 @@ package com.ticketerra.frontend.ticketerra_web_app.modelos;
 
 public class Usuario {
 
+    private Long id;
     private String correo;
     private String nombreCompleto;
     private String contrasena;
     private String tokenConfirmacion;
-    private Boolean activo = false;  
+    private Boolean activo = false;
     private String tokenRecuperacion;
-    private String rol = "user"; 
-    private String telefono;  
+    private String rol = "user";
+    private String telefono;
     private String codigoPostal;
-    private Long fechaRegistro; 
+    private Long fechaRegistro;
 
     // Constructor vacío
     public Usuario() {
         this.activo = false;
-        this.rol = "user"; 
+        this.rol = "user";
     }
 
     // Constructor con parámetros
-    public Usuario(String correo, String nombreCompleto, String contrasena, String tokenConfirmacion, Boolean activo, String tokenRecuperacion, String rol, String telefono, String codigoPostal, Long fechaRegistro) {
+    public Usuario(Long id, String correo, String nombreCompleto, String contrasena, String tokenConfirmacion, Boolean activo, String tokenRecuperacion, String rol, String telefono, String codigoPostal, Long fechaRegistro) {
+        this.id = id;
         this.correo = correo;
         this.nombreCompleto = nombreCompleto;
         this.contrasena = contrasena;
@@ -34,6 +36,14 @@ public class Usuario {
     }
 
     // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -117,7 +127,8 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "correo='" + correo + '\'' +
+                "id=" + id +
+                ", correo='" + correo + '\'' +
                 ", nombreCompleto='" + nombreCompleto + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", tokenConfirmacion='" + tokenConfirmacion + '\'' +
