@@ -14,7 +14,7 @@ import com.ticketerra.frontend.ticketerra_web_app.modelos.Usuario;
 public class AdminSupremoUsuariosServicios {
 
     private final RestTemplate restTemplate;
-    private final String API_URL = "http://localhost:8081/api/usuarios"; // URL de la API
+    private final String API_URL = "http://localhost:8081/api/usuarios"; // URL correcta de la API
 
     public AdminSupremoUsuariosServicios(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -23,7 +23,7 @@ public class AdminSupremoUsuariosServicios {
     // Método para obtener usuarios (con control de errores adecuado)
     public List<Usuario> obtenerUsuarios() {
         try {
-            Usuario[] usuarios = restTemplate.getForObject(API_URL, Usuario[].class);
+            Usuario[] usuarios = restTemplate.getForObject(API_URL + "/lista", Usuario[].class);
             if (usuarios != null) {
                 System.out.println("Usuarios obtenidos en el servicio de la capa web: " + Arrays.toString(usuarios));
             }

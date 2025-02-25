@@ -45,9 +45,11 @@ public class RegistroServicio {
         if (usuario.getCodigoPostal() == null) {
             usuario.setCodigoPostal("00000");  // Código postal por defecto (si no se proporciona)
         }
-        if (usuario.getFechaRegistro() == null) {
-            usuario.setFechaRegistro(System.currentTimeMillis());  // Fecha de registro por defecto
-        }
+		/*
+		 * if (usuario.getFechaRegistro() == null) {
+		 * usuario.setFechaRegistro(System.currentTimeMillis()); // Fecha de registro
+		 * por defecto }
+		 */
 
         // Generar token de confirmación
         String token = UUID.randomUUID().toString();

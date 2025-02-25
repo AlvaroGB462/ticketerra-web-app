@@ -50,11 +50,6 @@ public class LoginControlador {
         }
     }
 
-    // Página para adminSupremo
-    @GetMapping("/adminSupremoUsuarios")
-    public String adminSupremoDashboard() {
-        return "adminSupremoUsuarios";
-    }
 
     // Cerrar sesión
     @GetMapping("/logout")

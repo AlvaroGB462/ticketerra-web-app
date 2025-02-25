@@ -1,5 +1,7 @@
 package com.ticketerra.frontend.ticketerra_web_app.modelos;
 
+import java.time.LocalDateTime;
+
 public class Usuario {
 
     private Long id;
@@ -12,7 +14,7 @@ public class Usuario {
     private String rol = "user";
     private String telefono;
     private String codigoPostal;
-    private Long fechaRegistro;
+    private LocalDateTime fechaRegistro;
 
     // Constructor vacío
     public Usuario() {
@@ -21,7 +23,7 @@ public class Usuario {
     }
 
     // Constructor con parámetros
-    public Usuario(Long id, String correo, String nombreCompleto, String contrasena, String tokenConfirmacion, Boolean activo, String tokenRecuperacion, String rol, String telefono, String codigoPostal, Long fechaRegistro) {
+    public Usuario(Long id, String correo, String nombreCompleto, String contrasena, String tokenConfirmacion, Boolean activo, String tokenRecuperacion, String rol, String telefono, String codigoPostal, LocalDateTime fechaRegistro) {
         this.id = id;
         this.correo = correo;
         this.nombreCompleto = nombreCompleto;
@@ -116,11 +118,11 @@ public class Usuario {
         this.codigoPostal = codigoPostal;
     }
 
-    public Long getFechaRegistro() {
+    public LocalDateTime getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Long fechaRegistro) {
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

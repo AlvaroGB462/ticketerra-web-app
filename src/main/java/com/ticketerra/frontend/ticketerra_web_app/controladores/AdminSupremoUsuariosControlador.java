@@ -1,6 +1,5 @@
 package com.ticketerra.frontend.ticketerra_web_app.controladores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import com.ticketerra.frontend.ticketerra_web_app.modelos.Usuario;
 import com.ticketerra.frontend.ticketerra_web_app.servicios.AdminSupremoUsuariosServicios;
 
 @Controller
-@RequestMapping("/adminSupremoUsuarios")
+@RequestMapping("/usuarios")
 public class AdminSupremoUsuariosControlador {
 
     private final AdminSupremoUsuariosServicios adminSupremoUsuariosServicios;
@@ -23,18 +22,21 @@ public class AdminSupremoUsuariosControlador {
     public AdminSupremoUsuariosControlador(AdminSupremoUsuariosServicios adminSupremoUsuariosServicios) {
         this.adminSupremoUsuariosServicios = adminSupremoUsuariosServicios;
     }
+    
+    // Página para adminSupremo
+    @GetMapping("/adminSupremoUsuarios")
+    public String adminSupremoDashboard() {
+        return "adminSupremoUsuarios";
+    }
 
-    @GetMapping
+    @GetMapping("/lista")
     public String listarUsuarios(Model model) {
         List<Usuario> usuarios = adminSupremoUsuariosServicios.obtenerUsuarios();
-        System.out.println("Usuarios obtenidos en el controlador de la capa web: " + usuarios);
-
-        if (usuarios == null || usuarios.isEmpty()) {
-            usuarios = new ArrayList<>();
-        }
+        
+        System.out.println("Usuarios obtenidos en la capa web: " + usuarios);
 
         model.addAttribute("usuarios", usuarios);
-        return "adminSupremoUsuarios"; // Nombre de la vista donde se renderizan los usuarios
+        return "adminSupremoUsuarios";
     }
 
     @PostMapping("/eliminar")
@@ -44,7 +46,7 @@ public class AdminSupremoUsuariosControlador {
             adminSupremoUsuariosServicios.eliminarUsuario(correo);
             return "Usuario eliminado correctamente.";
         } catch (Exception e) {
-            return "Error al eliminar usuario: " + e.getMessage(); // Añadimos el mensaje de error
+            return "Error al eliminar usuario: " + e.getMessage();
         }
     }
 }

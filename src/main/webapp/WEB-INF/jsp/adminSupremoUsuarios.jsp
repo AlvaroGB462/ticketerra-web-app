@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.ticketerra.frontend.ticketerra_web_app.modelos.Usuario" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,27 +30,25 @@
                 </tr>
             </thead>
             <tbody id="userTable">
-                <%
-                    List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
-                    if (usuarios != null && !usuarios.isEmpty()) {
-                        for (Usuario usuario : usuarios) {
-                %>
-                    <tr>
-                        <td><%= usuario.getId() %></td>
-                        <td><%= usuario.getNombreCompleto() %></td>
-                        <td><%= usuario.getCorreo() %></td>
-                        <td class="user-actions">
-                            <button class="delete-user" onclick="eliminarUsuario('<%= usuario.getCorreo() %>')">Eliminar</button>
-                        </td>
-                    </tr>
-                <%
-                        }
-                    } else {
-                %>
-                    <tr>
-                        <td colspan="4">No hay usuarios disponibles</td>
-                    </tr>
-                <% } %>
+                <c:choose>
+                    <c:when test="${not empty usuarios}">
+                        <c:forEach var="usuario" items="${usuarios}">
+                            <tr>
+                                <td>${usuario.id}</td>
+                                <td>${usuario.nombreCompleto}</td>
+                                <td>${usuario.correo}</td>
+                                <td class="user-actions">
+                                    <button class="delete-user" onclick="eliminarUsuario('${usuario.correo}')">Eliminar</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td colspan="4">No hay usuarios disponibles</td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
             </tbody>
         </table>
     </div>
