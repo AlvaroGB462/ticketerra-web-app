@@ -26,16 +26,17 @@ public class LoginControlador {
         return "login"; // Vista del formulario de login
     }
 
-    // Manejo de autenticación
+ // Manejo de autenticación
     @PostMapping("/login")
     public String autenticarUsuario(@RequestParam String correo, @RequestParam String contrasena, HttpSession session, Model model) {
         String rolUsuario = loginServicio.obtenerRolUsuario(correo, contrasena);
 
         if (rolUsuario != null) {
+            // Guardar usuario y rol en la sesión
             session.setAttribute("usuario", correo);
-            session.setAttribute("rol", rolUsuario);
+            session.setAttribute("rolUsuario", rolUsuario);
 
-            // Actualizar estado activo a true cuando inicia sesión
+            // Actualizar estado activo en la BD
             loginServicio.actualizarEstadoActivo(correo, true);
 
             // Redirigir según el rol
@@ -50,20 +51,20 @@ public class LoginControlador {
         }
     }
 
-
     // Cerrar sesión
     @GetMapping("/logout")
     public String cerrarSesion(HttpSession session) {
         String correo = (String) session.getAttribute("usuario");
 
         if (correo != null) {
-            // Cambiar estado activo a false cuando el usuario cierra sesión
+            // Cambiar estado activo en la BD
             loginServicio.actualizarEstadoAinactivo(correo, false);
         }
 
-        session.invalidate();
+        session.invalidate(); // Invalidar sesión
         return "redirect:/usuarios/index";
     }
+
 
     // Página de recuperación de contraseña
     @GetMapping("/recuperar")

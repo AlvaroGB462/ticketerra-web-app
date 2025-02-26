@@ -15,12 +15,10 @@
     <div class="container">
         <h1>Panel de Gestión de Usuarios</h1>
         <div class="header-options">
-            <input id="searchInput" type="text" placeholder="Buscar usuarios">
-            <button id="addUserButton">Añadir Usuario</button>
             <a href="/usuarios/logout" class="btn btn-danger">Cerrar Sesión</a>
         </div>
 
-        <table class="table">
+        <table class="tabla">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -55,9 +53,16 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            cargarUsuarios();
-        });
+    
+    	
+    	var rolUsuario = "<%= session.getAttribute("rolUsuario") %>";
+
+    	if (!rolUsuario || rolUsuario !== "adminSupremo") {
+        	window.location.href = "/usuarios/index";
+    	}
+        	document.addEventListener("DOMContentLoaded", function () {
+            	cargarUsuarios();
+        	});
 
         function cargarUsuarios() {
             fetch('/usuarios/lista')
